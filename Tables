@@ -1,0 +1,44 @@
+#SQL Create Table
+Syntax
+Create table [table_name]
+(
+    Column_Name1 Data_Type(Size) [NULL | NOT NULL],
+    Column_Name2 Data_Type(Size) [NULL | NOT NULL],
+     …
+    Column_NameN Data_Type(Size) [NULL | NOT NULL]
+);
+#SQL Server Create Table Example
+CREATE TABLE [Customer]
+(
+  [CustomerKey] [int] NOT NULL,
+  [Name] [varchar](150) NULL,
+  [DateOfBirth] [date] NULL,
+  [EmailAddress] [nvarchar](50) NULL,
+  [Profession] [nvarchar](100) NULL
+)
+GO
+#Create Table with Identity Column
+CREATE TABLE [Customer11]
+(
+  [CustomerKey] [int] IDENTITY(1,1) NOT NULL,
+  [FirstName] [varchar](50) NULL,
+  [LastName] [varchar](50) NULL,
+  [BirthDate] [date] NULL,
+  [EmailAddress] [nvarchar](50) NULL,
+  [Yearly Income] [money] NULL,
+  [Profession] [nvarchar](100) NULL
+)
+GO
+#SQL Create Table with Primary Key
+CREATE TABLE [Customer111]
+(
+  [ID] [int] IDENTITY(1,1) NOT NULL,
+  [CustomerKey] [int] NOT NULL PRIMARY KEY,
+  [FirstName] [varchar](50) NOT NULL ,
+  [LastName] [varchar](50) NULL,
+  [BirthDate] [date] NULL,
+  [EmailAddress] [nvarchar](50) NULL,
+  [Yearly Income] [money] NULL,
+  [Profession] [nvarchar](100) NULL
+)
+GO
