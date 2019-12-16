@@ -1,0 +1,77 @@
+#SQL Attach Database
+Syntax to attach Database from MDF and LDF file is:
+EXEC sp_attach_db @dbname = N'Database Name',
+	@filename1 = 'location\MDFFileName.mdf',
+	@filename1 = 'location\LDFFileName.ldf'
+#Attach Database Approach 2
+CREATE DATABASE AdventureWorks2017
+	ON (FILENAME = 'location\MDFFileName.mdf'),
+	   (FILENAME =  'location\LDFFileName.ldf')
+FOR ATTACH;
+#SQL Detach Database
+EXEC sp_detach_db N'Database Name', 'true';
+Examle:- sp_detach_db N'AdventureWorks2017', 'true';
+#SQL Restore Database
+#QL Restore Database using BAK File
+RESTORE DATABASE DatbaseName
+	FROM DISK = 'D:\Backups\BackupFileName.bak'
+	WITH MOVE 'LogicalMDFFileName' TO 'location\MDFFileName.mdf',
+	MOVE 'LogicalLDFFileName' TO 'location\LDFFileName.ldf'
+  Example:-
+  RESTORE DATABASE AdventureWorks2017
+	FROM DISK = 'D:\Backups\AdventureWorks2017.bak'
+	WITH MOVE 'AdventureWorks2017' TO 'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\AdventureWorks2017.mdf',
+	MOVE 'AdventureWorks2017_log' TO 'C:\Program Files\Microsoft SQL Server\MSSQL14.MSSQLSERVER\MSSQL\DATA\AdventureWorks2017_log.ldf'
+# To retrieve logical file name
+RESTORE FILELISTONLY 
+	FROM DISK = 'D:\Backups\AdventureWorks2017.bak'
+  
+  #Create Database in Sql Server
+  Syntax:
+  CREATE DATABASE Database_Name
+  Example:
+  CREATE DATABASE New_Database;
+  #SQL Database name exists or not
+  IF NOT EXISTS 
+   (
+     SELECT name FROM master.dbo.sysdatabases 
+     WHERE name = N'New_Database'
+    )
+CREATE DATABASE [New_Database]
+# Code to Sql Server Create Database with if exits
+IF EXISTS 
+   (
+     SELECT name FROM master.dbo.sysdatabases 
+    WHERE name = N'New_Database'
+    )
+BEGIN
+    SELECT 'Database Name already Exist' AS Message
+END
+ELSE
+BEGIN
+    CREATE DATABASE [New_Database]
+    SELECT 'New Database is Created'
+END
+#Delete Database in SQL Server
+syntax:
+DROP DATABASE [Database Name]
+Example:
+DROP DATABASE [New_Database]
+#Rename Database in SQL Server
+Syntax:
+SP_RENAMEDB [Old Database Name],[New Database Name]
+Exmaple:
+SP_RENAMEDB  [New_Database],[New_Db]
+#Get all database names
+Syntax:
+use master
+Go
+select name from sys.databases
+#Another way
+USE master
+GO
+SELECT name FROM sys.databases
+#Another way
+USE master
+GO
+EXEC sp_databases
